@@ -1,106 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Bitter:ital,wght@0,300..800;1,300..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ---------------------------------------------------------------------------
+   Bridge Club @ UCLA — design tokens.
+
+   Colours are sampled straight out of the club's own printed flyers:
+   the blue field, the gold display type, the card-suit red, the black
+   keyline around every callout box. Nothing here was invented.
+   --------------------------------------------------------------------------- */
 
 @layer base {
   :root {
-    --background: 42 32% 96%;
-    --foreground: 158 45% 12%;
+    /* Brand — measured from the flyers */
+    --blue: 213 100% 34%;        /* #004aad — the flyer field */
+    --blue-deep: 214 100% 18%;   /* pressed/darker blue */
+    --blue-ink: 215 84% 11%;     /* near-black blue, for text on cream */
+    --gold: 45 46% 53%;          /* #c2a54c — the display type */
+    --gold-bright: 44 62% 67%;   /* highlight/hover */
+    --red: 355 75% 43%;          /* #bf1b2c — hearts & diamonds */
+    --cream: 42 44% 94%;         /* paper */
+    --cream-deep: 40 32% 88%;    /* paper, one step down */
+    --ink: 20 8% 9%;             /* #191614 — the keyline black */
 
+    /* Semantic (shadcn compatibility — the primitives above are the real API) */
+    --background: var(--cream);
+    --foreground: var(--ink);
     --card: 0 0% 100%;
-    --card-foreground: 158 45% 12%;
-
+    --card-foreground: var(--ink);
     --popover: 0 0% 100%;
-    --popover-foreground: 158 45% 12%;
-
-    --primary: 158 45% 25%;
-    --primary-foreground: 42 32% 96%;
-
-    --secondary: 42 65% 55%;
-    --secondary-foreground: 158 45% 12%;
-
-    --muted: 42 20% 88%;
-    --muted-foreground: 158 15% 45%;
-
-    --accent: 158 30% 35%;
-    --accent-foreground: 42 32% 96%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 158 15% 85%;
-    --input: 158 15% 90%;
-    --ring: 158 45% 25%;
-
-    --radius: 0.5rem;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(158 45% 18%) 0%, hsl(158 35% 25%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(42 32% 98%) 100%);
-    --shadow-elegant: 0 10px 40px -10px hsl(158 45% 25% / 0.2);
-    --shadow-glow: 0 0 60px hsl(42 65% 55% / 0.15);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 158 45% 8%;
-    --foreground: 42 32% 96%;
-
-    --card: 158 45% 10%;
-    --card-foreground: 42 32% 96%;
-
-    --popover: 158 45% 10%;
-    --popover-foreground: 42 32% 96%;
-
-    --primary: 42 65% 55%;
-    --primary-foreground: 158 45% 12%;
-
-    --secondary: 158 30% 20%;
-    --secondary-foreground: 42 32% 96%;
-
-    --muted: 158 30% 20%;
-    --muted-foreground: 42 20% 70%;
-
-    --accent: 158 30% 25%;
-    --accent-foreground: 42 32% 96%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 42 32% 96%;
-
-    --border: 158 30% 20%;
-    --input: 158 30% 20%;
-    --ring: 42 65% 55%;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(158 45% 8%) 0%, hsl(158 35% 15%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(158 45% 10%) 0%, hsl(158 40% 12%) 100%);
-    --shadow-elegant: 0 10px 40px -10px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 60px hsl(42 65% 55% / 0.2);
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --popover-foreground: var(--ink);
+    --primary: var(--blue);
+    --primary-foreground: var(--cream);
+    --secondary: var(--gold);
+    --secondary-foreground: var(--ink);
+    --muted: var(--cream-deep);
+    --muted-foreground: 30 6% 38%;
+    --accent: var(--gold);
+    --accent-foreground: var(--ink);
+    --destructive: var(--red);
+    --destructive-foreground: var(--cream);
+    --border: 40 20% 80%;
+    --input: 40 20% 78%;
+    --ring: var(--blue);
+    --radius: 0.75rem;
   }
 }
 
@@ -109,7 +54,176 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    -webkit-text-size-adjust: 100%;
   }
+
+  body {
+    @apply bg-cream text-ink font-body antialiased;
+    /* Paper tooth. Two hairline grids at odd angles read as fibre, not as a
+       repeating texture, and survive being scaled on a phone. */
+    background-image:
+      repeating-linear-gradient(
+        56deg,
+        hsl(var(--ink) / 0.022) 0 1px,
+        transparent 1px 4px
+      ),
+      repeating-linear-gradient(
+        -34deg,
+        hsl(var(--ink) / 0.016) 0 1px,
+        transparent 1px 6px
+      );
+  }
+
+  /* The flyers set every headline in the same heavy slab. So does the site. */
+  h1, h2, h3 {
+    @apply font-display font-normal;
+    letter-spacing: -0.015em;
+    line-height: 0.94;
+  }
+
+  ::selection {
+    background: hsl(var(--gold));
+    color: hsl(var(--ink));
+  }
+
+  :focus-visible {
+    outline: 3px solid hsl(var(--gold));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* -- The flyer's hard drop shadow on display type. ----------------------- */
+  .text-stamp {
+    text-shadow: 3px 3px 0 hsl(var(--ink));
+  }
+
+  @media (min-width: 768px) {
+    .text-stamp {
+      text-shadow: 5px 5px 0 hsl(var(--ink));
+    }
+  }
+
+  /* -- The flyer's white callout box: fat black keyline, hard offset. ------ */
+  .keyline {
+    border: 3px solid hsl(var(--ink));
+    border-radius: 1rem;
+    box-shadow: 6px 6px 0 hsl(var(--ink));
+  }
+
+  .keyline-sm {
+    border: 2px solid hsl(var(--ink));
+    border-radius: 0.75rem;
+    box-shadow: 4px 4px 0 hsl(var(--ink));
+  }
+
+  /* -- Photos hung like playing cards. -------------------------------------
+     The tilt lives on the element itself (not on an inline style) so that a
+     hover can straighten it. The deal-in animation sits on a wrapper, because
+     an animation with `both` fill would otherwise pin the transform forever
+     and the hover would never take. */
+  .photo-card {
+    background: #fff;
+    padding: 0.6rem;
+    border-radius: 0.9rem;
+    border: 2px solid hsl(var(--ink));
+    box-shadow: 6px 7px 0 hsl(var(--ink) / 0.9);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-card:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 8px 11px 0 hsl(var(--ink) / 0.9);
+  }
+
+  .photo-card img {
+    border-radius: 0.4rem;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* -- Small wide-tracked label, used above most sections. ---------------- */
+  .eyebrow {
+    @apply font-body font-bold uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+  }
+
+  /* -- Suit-lattice backdrop, redrawn from the club's flyer pattern. ------- */
+  .suit-lattice {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M30 12c-6 8-13 12-13 19a7 7 0 0 0 12 5l-2 8h12l-2-8a7 7 0 0 0 12-5c0-7-7-11-13-19z'/%3E%3Cpath d='M90 48c-7-8-13-11-13-17 0-4 3-7 7-7 3 0 5 1 6 3 1-2 3-3 6-3 4 0 7 3 7 7 0 6-6 9-13 17z'/%3E%3Cpath d='M30 72l11 16-11 16-11-16z'/%3E%3Cpath d='M84 84a7 7 0 1 0-5 12h16a7 7 0 1 0-5-12 7 7 0 1 0-6 0z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* -- Ticker strip. ------------------------------------------------------- */
+  .ticker-track {
+    animation: ticker 68s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+    }
+  }
+}
+
+@keyframes ticker {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes deal-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* A card landing on the trick. Deliberately animates transform only, with no
+   fill-mode: if the animation never runs — a throttled background tab, a
+   reduced-motion setting — the card still rests fully visible and in place.
+   Animating opacity with `fill: both` here would strand it invisible. */
+@keyframes card-drop {
+  from { transform: translateY(-9px) scale(0.94); }
+  to   { transform: none; }
+}
+
+.card-drop {
+  animation: card-drop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The running commentary re-keys on every beat, so it must never depend on an
+   animation to become visible — same reasoning as .card-drop above. */
+@keyframes beat-in {
+  from { transform: translateY(6px); }
+  to   { transform: none; }
+}
+
+.beat-in {
+  animation: beat-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }

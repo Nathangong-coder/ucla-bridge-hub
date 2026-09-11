@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original marketing assets & full-res photos (optimized copies live in src/assets/photos)
+source-images/

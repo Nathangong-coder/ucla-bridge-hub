@@ -1,150 +1,222 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Instagram, MessageCircle } from "lucide-react";
-import studentsImage from "@/assets/students-playing.jpg";
+import { Instagram } from "lucide-react";
+import {
+  ChunkyLink,
+  DiscordIcon,
+  Eyebrow,
+  PageHeader,
+  PhotoCard,
+  SuitRule,
+} from "@/components/Bits";
+import { CLUB } from "@/lib/club";
 
-const JoinUs = () => {
-  return (
-    <div className="min-h-screen pt-16 bg-background">
-      {/* Header */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6">
-            Join Our Community
-          </h1>
-          <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
-            Become part of UCLA's bridge family today
-          </p>
-        </div>
-      </section>
+import crewSelfie from "@/assets/photos/crew-selfie.jpg";
+import groupLineup from "@/assets/photos/group-lineup.jpg";
+import pizza from "@/assets/photos/pizza.jpg";
 
-      {/* How to Join */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Hero Image */}
-            <div className="mb-12 rounded-lg overflow-hidden shadow-elegant">
-              <img 
-                src={studentsImage} 
-                alt="Bridge club members" 
-                className="w-full h-auto object-cover"
-              />
-            </div>
+const steps = [
+  {
+    n: "01",
+    title: "Follow us somewhere",
+    body: "Discord or Instagram — we post the room, the week's lesson and everything else in both, and the club is split fairly evenly between them. Pick whichever you already open.",
+  },
+  {
+    n: "02",
+    title: "Turn up on a Friday",
+    body: "Any Friday. You do not need to tell anyone you are coming, and you do not need to bring anything — cards, boards and pizza are all handled.",
+  },
+  {
+    n: "03",
+    title: "Sit down and play",
+    body: "You will be put at a table with people who were also new not long ago. By the end of the night you will have played real hands.",
+  },
+];
 
-            {/* Join Steps */}
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">
-                Getting Started is Easy
+const faqs = [
+  {
+    q: "Do I need to know how to play?",
+    a: "No — and most people who show up do not. Nearly everyone in the club learned here. If you have never held a bridge hand, Friday is a completely normal time to start.",
+  },
+  {
+    q: "Is the $15 an hour real?",
+    a: `Yes. ${CLUB.pay.condition} There is no application and no skill requirement attached to it; the only condition is attendance.`,
+  },
+  {
+    q: "What do I need to bring?",
+    a: "Yourself. Cards, bidding boxes and duplicate boards are all provided, and the pizza is free. Bringing a friend is encouraged — bridge takes four.",
+  },
+  {
+    q: "Is there a membership fee?",
+    a: "No dues, no tryouts, no commitment. Come once and never again if you like; nobody will chase you.",
+  },
+  {
+    q: "Can I come if I can only make some weeks?",
+    a: "Of course. Half the quarter's sessions is the threshold for the stipend, but it is not a threshold for being welcome. Drop in when you can.",
+  },
+  {
+    q: "I already play. Is this too beginner for me?",
+    a: "Not at all — experienced players are badly needed and end up teaching a bit, which is its own kind of fun. Come find a partner.",
+  },
+];
+
+const JoinUs = () => (
+  <>
+    <PageHeader
+      eyebrow="Join"
+      title={
+        <>
+          There is no
+          <br />
+          sign-up form.
+        </>
+      }
+      lede="Follow us in whichever place you already check, so you know which room it is, then walk in on a Friday. That is the entire process, and it has been the entire process for years."
+    />
+
+    {/* -------- Three steps -------- */}
+    <section className="border-b-2 border-ink bg-cream py-20 md:py-28">
+      <div className="container">
+        <ol className="grid gap-6 md:grid-cols-3">
+          {steps.map((s) => (
+            <li
+              key={s.n}
+              className="keyline relative flex flex-col bg-white p-8"
+            >
+              <span
+                aria-hidden
+                className="font-display text-[3.4rem] leading-none text-gold text-stamp"
+              >
+                {s.n}
+              </span>
+              <h2 className="mt-5 font-display text-[1.7rem] leading-tight text-ink">
+                {s.title}
               </h2>
-              <p className="text-lg text-muted-foreground">
-                No experience needed • All skill levels welcome • Free to join
+              <p className="mt-4 font-body leading-relaxed text-ink/70">{s.body}</p>
+            </li>
+          ))}
+        </ol>
+
+        {/* Two channels, deliberately equal — the club is split between them. */}
+        <div className="mt-20 max-w-2xl">
+          <Eyebrow className="text-blue">Either one works</Eyebrow>
+          <h2 className="mt-4 font-display text-[clamp(1.9rem,5vw,3rem)] text-ink">
+            We post everything in both places.
+          </h2>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="keyline flex flex-col justify-between gap-8 bg-blue p-9 text-cream">
+            <div>
+              <DiscordIcon className="h-8 w-8 text-gold" />
+              <h3 className="mt-5 font-display text-[1.9rem] leading-tight text-gold">
+                Discord
+              </h3>
+              <p className="mt-3 font-body leading-relaxed text-cream/80">
+                Room announcements, the week's lesson topic, partner-finding, and
+                a running argument about a hand from three weeks ago.
               </p>
             </div>
+            <ChunkyLink href={CLUB.discord} variant="gold" className="w-full">
+              <DiscordIcon className="h-[1.15rem] w-[1.15rem]" />
+              Join the server
+            </ChunkyLink>
+          </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              {/* Discord */}
-              <Card className="bg-gradient-card border-border shadow-elegant hover:shadow-glow transition-all">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-primary/10 rounded-full">
-                      <MessageCircle className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl">Join Discord</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">
-                    Our Discord server is the hub of all club activities. Get event notifications, 
-                    ask questions, find practice partners, and connect with the community.
-                  </p>
-                  <Button 
-                    className="w-full bg-primary hover:bg-primary/90"
-                    size="lg"
-                    onClick={() => window.open('https://discord.gg/BXm7HPEuHQ', '_blank')}
-                  >
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                    </svg>
-                    Join Our Discord
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Instagram */}
-              <Card className="bg-gradient-card border-border shadow-elegant hover:shadow-glow transition-all">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-secondary/10 rounded-full">
-                      <Instagram className="h-6 w-6 text-secondary" />
-                    </div>
-                    <CardTitle className="text-2xl">Follow on Instagram</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">
-                    Stay updated with photos from our events, tournament highlights, and club announcements. 
-                    Follow us for a glimpse into the UCLA Bridge community!
-                  </p>
-                  <Button 
-                    variant="outline"
-                    className="w-full border-2 hover:bg-secondary/10"
-                    size="lg"
-                    onClick={() => window.open('https://www.instagram.com/bridgeclubucla/', '_blank')}
-                  >
-                    <Instagram className="w-5 h-5 mr-2" />
-                    @bridgeclubucla
-                  </Button>
-                </CardContent>
-              </Card>
+          <div className="keyline flex flex-col justify-between gap-8 bg-red p-9 text-cream">
+            <div>
+              <Instagram className="h-8 w-8 text-cream" />
+              <h3 className="mt-5 font-display text-[1.9rem] leading-tight text-cream">
+                Instagram
+              </h3>
+              <p className="mt-3 font-body leading-relaxed text-cream/85">
+                The weekly flyer, the room, and photos from the last session.
+                Follow it if you would rather the reminder turned up in a feed
+                you already scroll.
+              </p>
             </div>
-
-            {/* FAQ */}
-            <Card className="bg-gradient-card border-border shadow-elegant">
-              <CardHeader>
-                <CardTitle className="text-2xl">What to Expect</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Do I need to know how to play?</h4>
-                  <p className="text-muted-foreground">
-                    Not at all! We welcome complete beginners and provide lessons to help you learn. 
-                    Many of our members started with zero experience.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">What should I bring?</h4>
-                  <p className="text-muted-foreground">
-                    Just yourself! We provide all cards and materials. Bring a friend if you'd like—bridge is better together.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">How often do you meet?</h4>
-                  <p className="text-muted-foreground">
-                    We have weekly meetings and regular tournaments throughout the quarter. 
-                    Check our Discord for the most up-to-date schedule.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Is there a membership fee?</h4>
-                  <p className="text-muted-foreground">
-                    No! The club is completely free to join. We believe everyone should have access to learning and playing bridge.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Card Suits Decoration */}
-            <div className="flex justify-center gap-6 text-5xl mt-12 opacity-30">
-              <span>♠</span>
-              <span className="text-destructive">♥</span>
-              <span className="text-destructive">♦</span>
-              <span>♣</span>
-            </div>
+            <ChunkyLink href={CLUB.instagram} variant="cream" className="w-full">
+              <Instagram className="h-[1.15rem] w-[1.15rem]" />
+              Follow {CLUB.instagramHandle}
+            </ChunkyLink>
           </div>
         </div>
-      </section>
-    </div>
-  );
-};
+      </div>
+    </section>
+
+    {/* -------- FAQ -------- */}
+    <section className="border-b-2 border-ink bg-cream-deep py-20 md:py-28">
+      <div className="container grid gap-14 lg:grid-cols-[1fr_1.35fr] lg:gap-20">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Eyebrow className="text-blue">Before you ask</Eyebrow>
+          <h2 className="mt-4 font-display text-[clamp(2rem,5.5vw,3.2rem)] text-ink">
+            The six questions we always get.
+          </h2>
+          <PhotoCard
+            src={pizza}
+            alt="An open pizza box beside duplicate bridge boards"
+            rot={-3}
+            index={0}
+            className="mt-10 hidden w-full max-w-[18rem] lg:block"
+            imgClassName="aspect-[4/3]"
+            caption="Question seven is usually about the pizza. Yes, it is free."
+          />
+        </div>
+
+        <dl className="divide-y-2 divide-ink border-y-2 border-ink">
+          {faqs.map((f) => (
+            <div key={f.q} className="py-7">
+              <dt className="font-display text-[1.35rem] leading-tight text-ink md:text-[1.5rem]">
+                {f.q}
+              </dt>
+              <dd className="mt-3 font-body leading-relaxed text-ink/75">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    {/* -------- Closing -------- */}
+    <section className="suit-lattice relative overflow-hidden bg-blue-deep py-20 text-cream md:py-24">
+      <div className="container relative grid items-center gap-12 lg:grid-cols-[1fr_0.8fr]">
+        <div>
+          <h2 className="font-display text-[clamp(2rem,6vw,3.6rem)] text-gold text-stamp">
+            Come and eat our pizza.
+          </h2>
+          <p className="mt-6 max-w-lg font-body text-lg leading-relaxed text-cream/85">
+            {CLUB.meets.day}, {CLUB.meets.time}. Bring nothing, know nothing, sit
+            down anyway. It works out.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-4">
+            <ChunkyLink href={CLUB.discord} variant="gold">
+              <DiscordIcon className="h-[1.15rem] w-[1.15rem]" />
+              Join the Discord
+            </ChunkyLink>
+            <ChunkyLink href={CLUB.instagram} variant="cream">
+              <Instagram className="h-[1.15rem] w-[1.15rem]" />
+              {CLUB.instagramHandle}
+            </ChunkyLink>
+          </div>
+          <SuitRule className="mt-12 justify-start text-cream opacity-30" />
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[24rem]">
+          <PhotoCard
+            src={crewSelfie}
+            alt="A crowd of club members squeezed into a selfie"
+            rot={4}
+            index={0}
+            imgClassName="aspect-[4/3]"
+          />
+          <PhotoCard
+            src={groupLineup}
+            alt="Members lined up in front of the whiteboard"
+            rot={-6}
+            index={1}
+            className="absolute -bottom-10 -left-4 w-[52%]"
+            imgClassName="aspect-[4/3]"
+          />
+        </div>
+      </div>
+    </section>
+  </>
+);
 
 export default JoinUs;
